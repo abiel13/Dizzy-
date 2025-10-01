@@ -1,8 +1,7 @@
 "use client";
 
+import {  View } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { SodaCan } from "./SodaCan";
-import { Environment, Float } from "@react-three/drei";
 
 const ViewCanvas = () => {
   return (
@@ -23,15 +22,8 @@ const ViewCanvas = () => {
       gl={{ antialias: true }}
       dpr={[1, 1.5]}
     >
-      <Float
-      floatingRange={[-0.1, 0.4]}
-      rotationIntensity={4}
-      floatIntensity={.9}
-      >
-        <SodaCan />
-      </Float>
+      <View.Port />
 
-      <Environment files={"/hdrs/lobby.hdr"} backgroundIntensity={1.5} />
     </Canvas>
   );
 };

@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${alpino.variable} antialiased overflow-x-hidedn bg-yellow-300`}>
+      <body className={`${alpino.variable} antialiased !overflow-x-hidedn bg-yellow-300`}>
         <Header />
         <main>
           <ViewCanvas />
