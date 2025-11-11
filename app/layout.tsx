@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
-import ViewCanvas from "@/components/ViewCanvas";
+import Loading from "@/components/Loading";
 
 const alpino = localFont({
   src: "../public/font/Alpino-Variable.woff2",
@@ -24,12 +23,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${alpino.variable} antialiased !overflow-x-hidedn bg-yellow-300`}>
+      <body className={`${alpino.variable} antialiased !overflow-x-hidden bg-gradient-to-br from-amber-400 via-orange-300 to-rose-400`}>
+        <Loading />
         <Header />
-        <main>
-          <ViewCanvas />
-          {children}</main>
-
+        <main className="pt-16">
+          {children}
+        </main>
       </body>
     </html>
   );

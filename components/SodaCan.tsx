@@ -30,39 +30,41 @@ export function SodaCan({
   ...props
 }: SodaCanProps) {
   const { nodes } = useGLTF("/Soda-can.gltf");
-
   const labels = useTexture(flavorTextures);
-  
+
+  // Null checks
+  if (!nodes || !labels) {
+    return null;
+  }
+
   // Fixes upside down labels
-  labels.strawberryLemonade.flipY = false;
-  labels.blackCherry.flipY = false;
-  labels.watermelon.flipY = false;
-  labels.grape.flipY = false;
-  labels.lemonLime.flipY = false;
+  if (labels.strawberryLemonade) labels.strawberryLemonade.flipY = false;
+  if (labels.blackCherry) labels.blackCherry.flipY = false;
+  if (labels.watermelon) labels.watermelon.flipY = false;
+  if (labels.grape) labels.grape.flipY = false;
+  if (labels.lemonLime) labels.lemonLime.flipY = false;
 
   const label = labels[flavor];
+  const cylinder = nodes.cylinder as THREE.Mesh | undefined;
+  const cylinder1 = nodes.cylinder_1 as THREE.Mesh | undefined;
+  const tab = nodes.Tab as THREE.Mesh | undefined;
+
+  if (!cylinder || !cylinder1 || !tab || !label) {
+    return null;
+  }
 
   return (
     <group {...props} dispose={null} scale={scale} rotation={[0, -Math.PI, 0]}>
       <mesh
         castShadow
         receiveShadow
-        geometry={(nodes.cylinder as THREE.Mesh).geometry}
+        geometry={cylinder.geometry}
         material={metalMaterial}
       />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={(nodes.cylinder_1 as THREE.Mesh).geometry}
-      >
+      <mesh castShadow receiveShadow geometry={cylinder1.geometry}>
         <meshStandardMaterial roughness={0.15} metalness={0.7} map={label} />
       </mesh>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={(nodes.Tab as THREE.Mesh).geometry}
-        material={metalMaterial}
-      />
+      <mesh castShadow receiveShadow geometry={tab.geometry} material={metalMaterial} />
     </group>
   );
 }
