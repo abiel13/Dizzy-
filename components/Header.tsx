@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef } from 'react'
-import { FizziLogo } from './logo'
 import Link from 'next/link'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
@@ -24,7 +23,7 @@ function Header() {
   return (
     <header ref={headerRef} className='fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-3 backdrop-blur-sm bg-transparent'>
       <Link href="/" className="z-10">
-        <FizziLogo className='h-12 cursor-pointer text-white drop-shadow-lg transition-transform hover:scale-110' />
+        <h1 className='text-3xl font-black text-white drop-shadow-lg transition-transform hover:scale-110 cursor-pointer'>DRIZZY</h1>
       </Link>
       <nav ref={navRef} className="flex gap-6 items-center">
         <Link href="/" className="text-sm text-white font-semibold hover:text-amber-200 transition-colors drop-shadow-md">Home</Link>
