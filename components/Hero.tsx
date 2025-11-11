@@ -178,6 +178,8 @@ function HeroScene() {
 
     // Continuous floating and rotation animations - MORE DYNAMIC
     const floatAnimation = () => {
+      if (!can1Ref.current || !can2Ref.current || !can3Ref.current || !can4Ref.current || !can5Ref.current) return;
+
       // Individual can floating patterns - bigger movements, starting from higher base
       gsap.to(can1Ref.current.position, {
         y: "+=1.2",
@@ -272,12 +274,14 @@ function HeroScene() {
     floatAnimation();
 
     // Main group slow rotation
-    gsap.to(groupRef.current.rotation, {
-      y: Math.PI * 2,
-      duration: 30,
-      repeat: -1,
-      ease: "none",
-    });
+    if (groupRef.current) {
+      gsap.to(groupRef.current.rotation, {
+        y: Math.PI * 2,
+        duration: 30,
+        repeat: -1,
+        ease: "none",
+      });
+    }
 
     // Scroll-triggered animation
     ScrollTrigger.create({
@@ -295,13 +299,13 @@ function HeroScene() {
           });
         }
         // Parallax effect on individual cans
-        if (can1Ref.current) {
+        if (can1Ref.current?.position) {
           gsap.to(can1Ref.current.position, {
             z: -progress * 3,
             duration: 0.1,
           });
         }
-        if (can2Ref.current) {
+        if (can2Ref.current?.position) {
           gsap.to(can2Ref.current.position, {
             z: -progress * 2.5,
             duration: 0.1,
