@@ -18,9 +18,10 @@ export default function ContactPage() {
   }, []);
 
   useGSAP(() => {
-    if (!mounted) return;
+    if (!mounted || !formRef.current) return;
 
-    const elements = [titleRef.current, ...Array.from(formRef.current?.elements || [])].filter(Boolean);
+    const formElements = Array.from(formRef.current.elements);
+    const elements = [titleRef.current, ...formElements].filter(Boolean);
     gsap.set(elements, { opacity: 0, y: 30 });
 
     const tl = gsap.timeline({ delay: 0.3 });
@@ -30,7 +31,7 @@ export default function ContactPage() {
       duration: 1,
       ease: "power3.out",
     })
-    .to(formRef.current?.elements, {
+    .to(formElements, {
       y: 0,
       opacity: 1,
       duration: 0.6,

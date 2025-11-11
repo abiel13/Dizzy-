@@ -19,9 +19,10 @@ export default function AboutPage() {
   }, []);
 
   useGSAP(() => {
-    if (!mounted) return;
+    if (!mounted || !contentRef.current) return;
 
-    const elements = [titleRef.current, ...Array.from(contentRef.current?.children || [])].filter(Boolean);
+    const children = Array.from(contentRef.current.children);
+    const elements = [titleRef.current, ...children].filter(Boolean);
     gsap.set(elements, { opacity: 0, y: 50 });
 
     const tl = gsap.timeline({ delay: 0.3 });
@@ -31,7 +32,7 @@ export default function AboutPage() {
       duration: 1,
       ease: "power3.out",
     })
-    .to(contentRef.current?.children, {
+    .to(children, {
       y: 0,
       opacity: 1,
       duration: 0.8,

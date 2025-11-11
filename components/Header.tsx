@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from 'react'
-import FizziLogo  from './logo'
+import { FizziLogo } from './logo'
 import Link from 'next/link'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
